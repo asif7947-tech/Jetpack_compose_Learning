@@ -1,4 +1,4 @@
-package com.workerx.mycomposeapp.datalayer.remote
+package com.skybet.app.omdbapplication.data.remote
 
 
 import com.google.gson.annotations.SerializedName

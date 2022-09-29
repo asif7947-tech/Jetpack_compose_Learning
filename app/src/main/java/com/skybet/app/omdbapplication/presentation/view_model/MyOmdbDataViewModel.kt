@@ -27,18 +27,14 @@ class MyOmdbDataViewModel @Inject constructor(
     @ApplicationContext val context: Context
 ): ViewModel() {
 
-    private val _searchWidgetState: MutableState<SearchWidgetState> =
-        mutableStateOf(value = SearchWidgetState.CLOSED)
+    private val _searchWidgetState: MutableState<SearchWidgetState> = mutableStateOf(value = SearchWidgetState.CLOSED)
     val searchWidgetState: State<SearchWidgetState> = _searchWidgetState
 
 
-    private val _searchTextState: MutableState<String> =
-        mutableStateOf(value = "")
+    private val _searchTextState: MutableState<String> = mutableStateOf(value = "")
     val searchTextState: State<String> = _searchTextState
 
     val customerDataStateFlow: MutableState<ApiResponseStates> = mutableStateOf(ApiResponseStates.Empty)
-
-
 
     fun updateSearchWidgetState(newValue: SearchWidgetState) {
         _searchWidgetState.value = newValue
@@ -48,7 +44,7 @@ class MyOmdbDataViewModel @Inject constructor(
         _searchTextState.value = newValue
     }
 
-    fun searchMoviesbyName(search_name:String)=viewModelScope.launch{
+    fun searchMoviesbyName(search_name:String = "movie")=viewModelScope.launch{
         Log.e("TAG", "searchMoviesbyName:  "+search_name )
         if (NetworkUtils.isInternetAvailable(context)) {
             Log.e("TAG", "searchMoviesbyName: call api "+search_name )
@@ -70,18 +66,13 @@ class MyOmdbDataViewModel @Inject constructor(
                     Log.e("TAG", "searchMoviesbyName: onsucess "+response.moviesList.size )
 
                     response.let { appointResponse ->
-
                         customerDataStateFlow.value =
                             ApiResponseStates.onSuccessResponse(data = appointResponse.moviesList)
                     }
-
                 }
         } else {
             customerDataStateFlow.value =
                 ApiResponseStates.onNetworkFailure(context.getStringResourceByName(R.string.str_internet_connection))
         }
-
     }
-
-
 }

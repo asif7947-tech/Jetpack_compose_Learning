@@ -4,7 +4,7 @@ import android.util.Log
 import com.skybet.app.omdbapplication.utils.Constants.TIME_OUT
 import com.skybet.app.omdbapplication.utils.Constants.getBaseUrl
 
-import com.workerx.mycomposeapp.datalayer.remote.ApiService
+import com.skybet.app.omdbapplication.data.remote.ApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

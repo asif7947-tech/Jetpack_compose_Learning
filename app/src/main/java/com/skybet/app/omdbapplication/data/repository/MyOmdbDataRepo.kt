@@ -2,7 +2,6 @@ package com.skybet.app.omdbapplication.data.repository
 
 import com.skybet.app.omdbapplication.data.remote.NetworkDataSource
 import com.skybet.app.omdbapplication.data.response.ApiDataResponse
-import com.workerx.mycomposeapp.datalayer.remote.PostData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

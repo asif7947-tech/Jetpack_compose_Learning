@@ -1,4 +1,4 @@
-package com.workerx.mycomposeapp.presentationlayer.ui.theme
+package com.skybet.app.omdbapplication.presentation.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
