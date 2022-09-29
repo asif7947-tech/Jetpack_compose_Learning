@@ -4,6 +4,7 @@
 .idea
 /.idea/
 buildSrc/build/
+.gradle/
 .DS_Store
 /build
 /captures
