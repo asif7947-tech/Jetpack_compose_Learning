@@ -9,38 +9,23 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
-import androidx.compose.material.ContentAlpha.medium
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil.ImageLoader
 import coil.compose.rememberAsyncImagePainter
-import com.skybet.app.omdbapplication.R
 import com.skybet.app.omdbapplication.data.remote.ApiResponseStates
 import com.skybet.app.omdbapplication.data.response.MovieModel
 import com.skybet.app.omdbapplication.presentation.view_model.MyOmdbDataViewModel
-import com.workerx.mycomposeapp.datalayer.remote.PostData
-import com.workerx.mycomposeapp.presentationlayer.ui.theme.MyOmdbAppTheme
+import com.skybet.app.omdbapplication.presentation.theme.MyOmdbAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -66,6 +51,7 @@ class MainActivity : ComponentActivity() {
     fun MainScreenUi(mainViewModel: MyOmdbDataViewModel) {
         val searchWidgetState by mainViewModel.searchWidgetState
         val searchTextState by mainViewModel.searchTextState
+
         Scaffold(
             topBar = {
                 MainAppBar(
@@ -93,6 +79,9 @@ class MainActivity : ComponentActivity() {
 
             SetDataInUi(myOmdbDataViewModel)
 
+            mainViewModel.searchMoviesbyName()
+
+
         }
     }
 
@@ -111,6 +100,9 @@ class MainActivity : ComponentActivity() {
                 }
                 is ApiResponseStates.onSuccessResponse->{
                     Log.e(TAG, "getDataFromServerAndSet:  onSuccessResponse ${result.data.toString()}", )
+
+
+
                     LazyColumn{
                         items(result.data){movie->
                             EachPostItemCart(movieData = movie)
@@ -121,12 +113,19 @@ class MainActivity : ComponentActivity() {
                 is ApiResponseStates.onFailure->{
                     Log.e(TAG, "getDataFromServerAndSet:  onFailure  ${result.message}", )
 
+                    showMessageBox(textMsg =  "Api call failed due to  ${result.message}")
+
                 }
                 is ApiResponseStates.onNetworkFailure->{
-                    Log.e(TAG, "getDataFromServerAndSet:  onNetworkFailure", )
+                    Log.e(TAG, "getDataFromServerAndSet:  onNetworkFailure" )
+                    showMessageBox(textMsg =  "getDataFromServerAndSet:  onNetworkFailure ${result.message}")
+
+
                 }
                 else ->{
                     Log.e(TAG, "getDataFromServerAndSet:  else", )
+                    showMessageBox(textMsg =  "getDataFromServerAndSet:  else")
+
                 }
             }
 
@@ -140,22 +139,22 @@ class MainActivity : ComponentActivity() {
         Box(modifier = Modifier.fillMaxSize()) {
             Card( modifier = Modifier
                 .padding(horizontal = 25.dp, vertical = 8.dp)
-                .fillMaxWidth()
-                ,
+                .fillMaxWidth(),
                 elevation = 2.dp,
                 shape = RoundedCornerShape(4.dp)
             ) {
                 Column(modifier = Modifier.padding(5.dp)) {
                     Image(
-                         painter = rememberAsyncImagePainter(movieData.poster
-                         ),
+                         painter = rememberAsyncImagePainter(movieData.poster),
                         contentDescription = "image",
                         modifier = Modifier
                             .padding(5.dp)
                             .fillMaxWidth()
                             .height(200.dp)
                     )
-                    Text(modifier = Modifier.wrapContentSize().align(CenterHorizontally),
+                    Text(modifier = Modifier
+                        .wrapContentSize()
+                        .align(CenterHorizontally),
                         text = movieData.title,
                         fontWeight = FontWeight.Bold,
                         fontStyle = FontStyle.Italic,
@@ -165,23 +164,26 @@ class MainActivity : ComponentActivity() {
                     Row(
                         modifier = Modifier
                             .padding(10.dp)
-                            .wrapContentSize().align(CenterHorizontally)
+                            .wrapContentSize()
+                            .align(CenterHorizontally)
                     ) {
                         Text(
-                            text ="type ="+ movieData.type+"   ,",
+                            text ="type = "+ movieData.type+" ,",
                             fontWeight = FontWeight.SemiBold,
                             fontStyle = FontStyle.Italic
                         )
                         Spacer(modifier = Modifier.size(3.dp))
                         Text(
-                            text ="Release In  ="+ movieData.year+"   ,",
+                            text ="Release In  = "+ movieData.year+"   ,",
                             fontWeight = FontWeight.SemiBold,
                             fontStyle = FontStyle.Italic
                         )
                     }
                     Spacer(modifier = Modifier.size(3.dp))
-                    Text(modifier = Modifier.wrapContentSize().align(CenterHorizontally),
-                        text ="MovieId  ="+ movieData.imdbID+" ",
+                    Text(modifier = Modifier
+                        .wrapContentSize()
+                        .align(CenterHorizontally),
+                        text ="MovieId  = "+ movieData.imdbID+" ",
                         fontWeight = FontWeight.SemiBold,
                         fontStyle = FontStyle.Italic
                     )
@@ -200,7 +202,13 @@ class MainActivity : ComponentActivity() {
             MainScreenUi(myOmdbDataViewModel)
         }
     }
-
-
+    @Composable
+    fun showMessageBox(textMsg : String){
+        Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+            Column(modifier = Modifier.padding(10.dp),horizontalAlignment = Alignment.CenterHorizontally) {
+                Text(text = textMsg)
+            }
+        }
+    }
 }
 
