@@ -139,7 +139,7 @@ class MainActivity : ComponentActivity() {
     fun EachPostItemCart(movieData: MovieModel){
         Box(modifier = Modifier.fillMaxSize()) {
             Card( modifier = Modifier
-                .padding(horizontal = 8.dp, vertical = 8.dp)
+                .padding(horizontal = 25.dp, vertical = 8.dp)
                 .fillMaxWidth()
                 ,
                 elevation = 2.dp,
@@ -155,24 +155,37 @@ class MainActivity : ComponentActivity() {
                             .fillMaxWidth()
                             .height(200.dp)
                     )
-                    Column(
+                    Text(modifier = Modifier.wrapContentSize().align(CenterHorizontally),
+                        text = movieData.title,
+                        fontWeight = FontWeight.Bold,
+                        fontStyle = FontStyle.Italic,
+                        color = Color.Blue
+                    )
+                    Spacer(modifier = Modifier.size(10.dp))
+                    Row(
                         modifier = Modifier
                             .padding(10.dp)
                             .wrapContentSize().align(CenterHorizontally)
                     ) {
                         Text(
-                            text = movieData.title,
-                            fontWeight = FontWeight.Bold,
-                            fontStyle = FontStyle.Italic,
-                            color = Color.Blue
+                            text ="type ="+ movieData.type+"   ,",
+                            fontWeight = FontWeight.SemiBold,
+                            fontStyle = FontStyle.Italic
                         )
-                        Spacer(modifier = Modifier.size(10.dp))
+                        Spacer(modifier = Modifier.size(3.dp))
                         Text(
-                            text = movieData.type,
+                            text ="Release In  ="+ movieData.year+"   ,",
                             fontWeight = FontWeight.SemiBold,
                             fontStyle = FontStyle.Italic
                         )
                     }
+                    Spacer(modifier = Modifier.size(3.dp))
+                    Text(modifier = Modifier.wrapContentSize().align(CenterHorizontally),
+                        text ="MovieId  ="+ movieData.imdbID+" ",
+                        fontWeight = FontWeight.SemiBold,
+                        fontStyle = FontStyle.Italic
+                    )
+
                 }
             }
 
