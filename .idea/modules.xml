@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/OmdbApplication.iml" filepath="$PROJECT_DIR$/.idea/modules/OmdbApplication.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/OmdbApplication.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/OmdbApplication.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/OmdbApplication.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/OmdbApplication.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/OmdbApplication.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/OmdbApplication.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/OmdbApplication.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/OmdbApplication.app.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/OmdbApplication.buildSrc.iml" filepath="$PROJECT_DIR$/.idea/modules/OmdbApplication.buildSrc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/OmdbApplication.buildSrc.main.iml" filepath="$PROJECT_DIR$/.idea/modules/OmdbApplication.buildSrc.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/OmdbApplication.buildSrc.test.iml" filepath="$PROJECT_DIR$/.idea/modules/OmdbApplication.buildSrc.test.iml" />
+    </modules>
+  </component>
+</project>

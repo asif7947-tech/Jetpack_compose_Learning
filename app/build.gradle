@@ -1,0 +1,134 @@
+import com.skybet.app.buildSrc.Libs
+
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    compileSdk 32
+
+    defaultConfig {
+        applicationId "com.skybet.app.omdbapplication"
+        minSdk 24
+        targetSdk 31
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        vectorDrawables {
+            useSupportLibrary true
+        }
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+        }
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+
+    flavorDimensions "default"
+
+    productFlavors {
+
+        stagging {
+            buildConfigField "String", "BASE_SERVER_URL", "\"https://www.omdbapi.com/\""
+            buildConfigField "String", "API_KEY", "\"ce23ee1b\""
+            buildConfigField "boolean", "IS_INTERNAL_TESTING", 'true'
+        }
+        production {
+            buildConfigField "String", "BASE_SERVER_URL", "\"https://www.omdbapi.com/\""
+            buildConfigField "String", "API_KEY", "\"ce23ee1b\""
+            buildConfigField "boolean", "IS_INTERNAL_TESTING", 'false'
+        }
+
+    }
+
+    buildFeatures {
+        compose true
+        viewBinding true
+    }
+
+
+
+    composeOptions {
+        kotlinCompilerExtensionVersion Libs.AndroidX.Compose.compose_version
+    }
+
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+}
+
+dependencies {
+
+//    implementation Libs.Kotlin.stdlib
+//    implementation Libs.Kotlin.reflect
+//    implementation Libs.Kotlin.extensions
+
+    implementation Libs.Google.gson
+
+    implementation Libs.AndroidX.coreKtx
+//    implementation Libs.AndroidX.appCompat
+//    implementation Libs.AndroidX.material
+//    implementation Libs.AndroidX.constraintLayout
+
+    // Navigation
+//    implementation Libs.AndroidX.Navigation.ui
+//    implementation Libs.AndroidX.Navigation.fragment
+
+    // Compose
+    implementation Libs.AndroidX.Compose.ui
+    debugImplementation  Libs.AndroidX.Compose.uiTooling
+    implementation Libs.AndroidX.Compose.material
+    implementation Libs.AndroidX.Compose.lifecycle
+    implementation Libs.AndroidX.Compose.activity
+    implementation Libs.AndroidX.Compose.viewModel
+
+    // Retrofit
+    implementation Libs.Retrofit.retrofit
+    implementation Libs.Retrofit.gsonConverter
+    implementation Libs.Retrofit.moshiConverter
+    implementation Libs.Retrofit.okhttploging
+    implementation Libs.Retrofit.okhtt
+
+    // Glide
+//    implementation Libs.Glide.library
+//    implementation Libs.Glide.Compose.library
+//    annotationProcessor Libs.Glide.compiler
+    //Coil Image Loading Liberary
+    implementation Libs.Coil.library
+    // Moshi
+    implementation Libs.Moshi.moshiKotlin
+    implementation Libs.Moshi.moshiAdapters
+    kapt Libs.Moshi.moshiKotlinCodegen
+
+    // di
+//    implementation Libs.DI.Koin.koin
+    implementation Libs.DI.Hilt.library
+    kapt Libs.DI.Hilt.compiler
+    kapt Libs.DI.Hilt.jvmmetadata
+}

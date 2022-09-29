@@ -1,0 +1,26 @@
+import com.skybet.app.buildSrc.Libs
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath Libs.androidGradlePlugin
+        classpath Libs.Kotlin.gradlePlugin
+//        classpath Libs.Kotlin.extensions
+        classpath Libs.DI.Hilt.gradlePlugin
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
