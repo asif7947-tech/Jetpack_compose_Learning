@@ -4,6 +4,7 @@
 .idea
 /.idea/
 buildSrc/build/
+buildSrc/gradle/
 .gradle/
 .DS_Store
 /build
